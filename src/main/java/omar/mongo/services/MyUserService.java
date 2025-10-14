@@ -18,4 +18,8 @@ public class MyUserService {
     public List<User> findAllUsers(){
         return userRepo.findAll();
     }
+
+    public User getUserByEmail(String email){
+        return userRepo.findUserByEmail(email);
+    }
 }
