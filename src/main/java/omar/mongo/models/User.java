@@ -21,4 +21,9 @@ public class User {
     public String username;
     public String email;
     public String password;
+
+    public User(String email){
+        this.email = email;
+    } 
+
 }

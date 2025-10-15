@@ -1,5 +1,7 @@
 package omar.mongo.repositories;
 
+import java.util.Optional;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,5 +10,5 @@ import omar.mongo.models.User;
 
 @Repository
 public interface UserRepository extends MongoRepository<User, String>{
-    public User findUserByEmail(String email);
+    Optional<User> findUserByEmail(String email);
 }
