@@ -1,5 +1,6 @@
 package omar.mongo.services;
 
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -25,17 +26,39 @@ public class UserServiceTest {
     private MyUserService userService;
 
     @Test
-    void shouldReturnUserWhenFoundByEmail(){
+    void shouldReturnUserWhenFoundByEmail() {
+        // Arrange
         var testEmail = "omar@mail.com";
         User mockUser = new User(testEmail);
         when(userRepository.findUserByEmail(testEmail)).thenReturn(Optional.of(mockUser));
 
+        // Act
         var result = userService.getUserByEmail(testEmail);
 
+        // Assert
         assertThat(result.getEmail()).isEqualTo(testEmail);
         verify(userRepository).findUserByEmail(testEmail);
 
     }
 
-    
+    @Test
+    void shouldThrowUserNotFoundExc(){
+        when(userRepository.findUserByEmail(anyString())).thenReturn(Optional.empty());
+
+        assertThatThrownBy(() -> userService.getUserByEmail("test@mail.com"))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("User Not Found");
+    }
+
 }
+
+// - @SpringBootTest loads the full Spring context—not suitable for unit tests.
+// - Use JUnit 5 + Mockito for lightweight, fast tests.
+
+// Follow the AAA Pattern (Arrange, Act, Assert)
+
+// Unit tests are not the place to test:
+// - Dependency injection
+// - Properties loading
+// - Actual DB connections
+// Leave that for integration tests.

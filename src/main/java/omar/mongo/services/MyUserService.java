@@ -20,6 +20,6 @@ public class MyUserService {
 
     public User getUserByEmail(String email) {
         return userRepo.findUserByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("user not found with email" + email));
+                .orElseThrow(() -> new IllegalArgumentException("User Not Found with email" + email));
     }
 }
