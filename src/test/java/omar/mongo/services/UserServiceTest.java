@@ -42,7 +42,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void shouldThrowUserNotFoundExc(){
+    void shouldThrowExcWhenUserNotFound(){
         when(userRepository.findUserByEmail(anyString())).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> userService.getUserByEmail("test@mail.com"))
