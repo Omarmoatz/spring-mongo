@@ -12,6 +12,9 @@ public class BookService {
     
 
     public Book addBook(Book book){
+        if(book.getPrice() <= 0)
+            throw new IllegalArgumentException("Price must be greater than zero");
+        
         var newBook = new Book(book.getName(), book.getPrice());
         return bookRepository.save(newBook);
     }

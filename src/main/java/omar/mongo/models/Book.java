@@ -19,5 +19,5 @@ public class Book {
     @Id
     public String id;
     public final String name;
-    public final String price;
+    public final double price;
 }
